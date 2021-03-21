@@ -2,12 +2,16 @@ package com.smarthost.reservation.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +24,12 @@ import com.smarthost.reservation.dto.RoomUsageDetailsDTO;
 public class ReserveServiceTest {
 	@Resource
 	ReserveService reserveService;
+
+	@BeforeEach
+	public void beforeEach(TestInfo info) {
+		List<Integer> guestPriceQuote = Arrays.asList(23, 45, 155, 374, 22, 99, 100, 101, 115, 209);
+		reserveService.initGuestPriceQuotes(guestPriceQuote);
+	}
 
 	@Test
 	@DisplayName("Test when no guest price quote is available, no or null room usage is expected.")
@@ -53,7 +63,18 @@ public class ReserveServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0, 0, 0, 0, 0, 0" })
+	// @formatter:off
+ 	@CsvSource({ 
+ 		"0, 0, 0, 0, 0, 0",
+ 		"0, 1, 0, 1, 0, 99",
+ 		"1, 0, 1, 0, 374, 0",
+ 		"3, 3, 3, 3, 738, 167" ,
+		"7, 5, 6, 4, 1054, 189", 
+		"2, 7, 2, 4, 583, 189", 
+		"7, 1, 7, 1, 1153, 45",
+		"1, 1, 1, 1, 374, 99"
+		})
+	// @formatter:on
 	void inputRoomsTest(int inputPremiumRoomCount, int inputEconomyRoomCount, int premiumRoomCount,
 			int economyRoomCount, int premiumRoomUsage, int economyRoomUsage) {
 		// prepare
