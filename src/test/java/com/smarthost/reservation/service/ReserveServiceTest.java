@@ -68,6 +68,7 @@ public class ReserveServiceTest {
  		"0, 0, 0, 0, 0, 0",
  		"0, 1, 0, 1, 0, 99",
  		"1, 0, 1, 0, 374, 0",
+ 		"5, 5, 5, 4, 954, 189",
  		"3, 3, 3, 3, 738, 167" ,
 		"7, 5, 6, 4, 1054, 189", 
 		"2, 7, 2, 4, 583, 189", 
@@ -92,5 +93,36 @@ public class ReserveServiceTest {
 				inputEconomyRoomCount);
 		// verify
 		assertEquals(roomUsageDetailsDTOExpected, roomUsageDetailsDTOActual);
+	}
+
+	@Test
+	void inputRoomsTest_whenAllBudgetIsNotPremium() {
+		// prepare
+		int inputPremiumRoomCount = 2;
+		int inputEconomyRoomCount = 2;
+
+		int premiumRoomCount = 2;
+		int premiumRoomUsage = 120;
+		int economyRoomCount = 2;
+		int economyRoomUsage = 40;
+
+		reserveService.initGuestPriceQuotes(Arrays.asList(25, 15, 35, 85));
+
+		RoomUsageDetailsDTO roomUsageDetailsDTOExpected;
+		// @formatter:off
+		roomUsageDetailsDTOExpected = RoomUsageDetailsDTO.builder()
+										.premiumRoomCount(premiumRoomCount)
+										.premiumRoomUsage(premiumRoomUsage)
+										.economyRoomCount(economyRoomCount)
+										.economyRoomUsage(economyRoomUsage)
+										.build();
+		// @formatter:on
+
+		// execute
+		RoomUsageDetailsDTO roomUsageDetailsDTOActual = reserveService.getRoomUsageDetails(inputPremiumRoomCount,
+				inputEconomyRoomCount);
+		// verify
+		assertEquals(roomUsageDetailsDTOExpected, roomUsageDetailsDTOActual);
+
 	}
 }

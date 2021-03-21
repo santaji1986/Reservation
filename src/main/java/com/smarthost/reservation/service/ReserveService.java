@@ -33,7 +33,8 @@ public class ReserveService implements IReserveService {
 					guestPriceQuotes.get(currentCount++));
 		}
 		while (isUpgradeToPremiumApplicable(premiumRoomUsed, inputPremiumRoomCount, inputEconomyRoomCount)) {
-			roomUsageDetailsDTO = reservePremiumRoom(premiumRoomUsed++, roomUsageDetailsDTO, guestPriceQuotes.get(currentCount++));
+			roomUsageDetailsDTO = reservePremiumRoom(premiumRoomUsed++, roomUsageDetailsDTO,
+					guestPriceQuotes.get(currentCount++));
 		}
 		while (economyRoomUsed < inputEconomyRoomCount && currentCount < guestPriceQuotes.size()) {
 			if (isEconomyRoomAssignable(inputEconomyRoomCount, economyRoomUsed, guestPriceQuotes.get(currentCount))) {
@@ -45,7 +46,8 @@ public class ReserveService implements IReserveService {
 		return roomUsageDetailsDTO;
 	}
 
-	private RoomUsageDetailsDTO reserveEconomyRoom(int i, RoomUsageDetailsDTO roomUsageDetailsDTO, Integer currentGuestPrice) {
+	private RoomUsageDetailsDTO reserveEconomyRoom(int i, RoomUsageDetailsDTO roomUsageDetailsDTO,
+			Integer currentGuestPrice) {
 		roomUsageDetailsDTO.setEconomyRoomUsage(roomUsageDetailsDTO.getEconomyRoomUsage() + currentGuestPrice);
 		roomUsageDetailsDTO.setEconomyRoomCount(roomUsageDetailsDTO.getEconomyRoomCount() + 1);
 		return roomUsageDetailsDTO;
@@ -57,7 +59,8 @@ public class ReserveService implements IReserveService {
 
 	private boolean isUpgradeToPremiumApplicable(int premiumRoomUsed, int inputPremiumRoomCount,
 			int inputEconomyRoomCount) {
-		return premiumRoomUsed < inputPremiumRoomCount && (guestPriceQuotes.size() - inputPremiumRoomCount) > inputEconomyRoomCount;
+		return premiumRoomUsed < inputPremiumRoomCount
+				&& (guestPriceQuotes.size() - (inputEconomyRoomCount + premiumRoomUsed)) > 0;
 	}
 
 	private RoomUsageDetailsDTO reservePremiumRoom(int premiumRoomUsed, RoomUsageDetailsDTO roomUsageDetailsDTO,
