@@ -1,4 +1,4 @@
-package com.smarthost.reservation;
+package com.smarthost.reservation.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReserveController {
 
 	@GetMapping("/hello")
-	String hello(@RequestParam(required = false) String name) {
+	String hello(@RequestParam(required = false, defaultValue = "") String name) {
 		return "Hello " + name;
 	}
 
