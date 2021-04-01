@@ -27,7 +27,7 @@ public class ReserveServiceTest {
 
 	@BeforeEach
 	public void beforeEach(TestInfo info) {
-		List<Integer> guestPriceQuote = Arrays.asList(23, 45, 155, 374, 22, 99, 100, 101, 115, 209);
+		List<Float> guestPriceQuote = Arrays.asList(23f, 45f, 155f, 374f, 22f, 99f, 100f, 101f, 115f, 209f);
 		reserveService.initGuestPriceQuotes(guestPriceQuote);
 	}
 
@@ -39,9 +39,9 @@ public class ReserveServiceTest {
 		int inputEconomyRoomCount = 2;
 
 		int premiumRoomCount = 0;
-		int premiumRoomUsage = 0;
+		Float premiumRoomUsage = 0f;
 		int economyRoomCount = 0;
-		int economyRoomUsage = 0;
+		Float economyRoomUsage = 0f;
 
 		reserveService.initGuestPriceQuotes(Collections.emptyList());
 
@@ -77,7 +77,7 @@ public class ReserveServiceTest {
 		})
 	// @formatter:on
 	void inputRoomsTest(int inputPremiumRoomCount, int inputEconomyRoomCount, int premiumRoomCount,
-			int economyRoomCount, int premiumRoomUsage, int economyRoomUsage) {
+			int economyRoomCount, Float premiumRoomUsage, Float economyRoomUsage) {
 		// prepare
 		RoomUsageDetailsDTO roomUsageDetailsDTOExpected;
 		// @formatter:off
@@ -102,11 +102,11 @@ public class ReserveServiceTest {
 		int inputEconomyRoomCount = 2;
 
 		int premiumRoomCount = 2;
-		int premiumRoomUsage = 120;
+		Float premiumRoomUsage = 120f;
 		int economyRoomCount = 2;
-		int economyRoomUsage = 40;
+		Float economyRoomUsage = 40f;
 
-		reserveService.initGuestPriceQuotes(Arrays.asList(25, 15, 35, 85));
+		reserveService.initGuestPriceQuotes(Arrays.asList(25f, 15f, 35f, 85f));
 
 		RoomUsageDetailsDTO roomUsageDetailsDTOExpected;
 		// @formatter:off
