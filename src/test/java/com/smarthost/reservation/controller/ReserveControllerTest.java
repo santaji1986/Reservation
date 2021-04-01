@@ -60,7 +60,7 @@ class ReserveControllerTest {
 	@Test
 	@DisplayName("Validate initGuestPriceQuotesTest endpoint for HTTP response code 200")
 	public void initGuestPriceQuotesTest() throws Exception {
-		List<Integer> guestPriceQuotes = Collections.emptyList();
+		List<Float> guestPriceQuotes = Collections.emptyList();
 		doNothing().when(reserveService).initGuestPriceQuotes(guestPriceQuotes);
 		// @formatter:off
 			this.mockMvc.perform(
@@ -75,7 +75,12 @@ class ReserveControllerTest {
 	@Test
 	@DisplayName("Validate JSON response returned from getRoomUsageDetails endpoint")
 	public void getRoomUsageDetailsTest() throws Exception {
-		RoomUsageDetailsDTO roomUsageDetailsDTO = RoomUsageDetailsDTO.builder().build();
+		RoomUsageDetailsDTO roomUsageDetailsDTO = RoomUsageDetailsDTO.builder()
+													.premiumRoomCount(0)
+													.premiumRoomUsage(0f)
+													.economyRoomCount(0)
+													.economyRoomUsage(0f)
+													.build();
 		when(reserveService.getRoomUsageDetails(Mockito.anyInt(), Mockito.anyInt())).thenReturn(roomUsageDetailsDTO);
 		String jsonContent = "{\"premiumRoomCount\":0,\"premiumRoomUsage\":0,\"economyRoomCount\":0,\"economyRoomUsage\":0}";
 		// @formatter:off

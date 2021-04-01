@@ -2,16 +2,14 @@ package com.smarthost.reservation.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
-@Data
+@Value
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 public class RoomUsageDetailsDTO {
 	private int premiumRoomCount;
-	private int premiumRoomUsage;
+	private Float premiumRoomUsage;
 	private int economyRoomCount;
-	private int economyRoomUsage;
+	private Float economyRoomUsage;
 }
