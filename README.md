@@ -2,9 +2,8 @@
 
 ### Run example using command line
 
->
-set JAVA_HOME=C:\localinstalls\jdk-11.0.2  
-mvn spring-boot:run 
+>set JAVA_HOME=C:\localinstalls\jdk-11.0.2  
+>mvn spring-boot:run 
 
 ### Test example using browser or postman
 
@@ -20,3 +19,21 @@ mvn spring-boot:run
 >mvn surefire-report:report
 
 Report can be found at **`target\site\surefire-report.html`**
+
+#### Swagger integration
+
+http://localhost:8080/swagger-ui.html
+
+### 2 ways to create docker image
+
+#### 1 Create docker image using buildpack
+
+>mvn spring-boot:build-image
+
+#### 2 Create docker image usig multistage Dockerfile
+
+>docker build -t santaji1986/reservation:latest .
+
+### Run the docker image using
+
+>docker run -d -p 8080:8080 santaji1986/reservation
