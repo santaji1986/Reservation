@@ -37,3 +37,25 @@ http://localhost:8080/swagger-ui.html
 ### Run the docker image using
 
 >docker run -d -p 8080:8080 santaji1986/reservation
+
+
+
+### Deployment to Azure AppService
+
+
+1.   Generate fat jar file
+
+>mvn clean package
+
+2.  Below command will add configuration required for publishing jar file
+
+>mvn azure-webapp:config
+
+3.  Azure login before deploy -
+
+>az login
+
+4.  Deploy using below command, app service plan will be created based on previously entered config -
+
+>mvn azure-webapp:deploy
+
